@@ -31,3 +31,6 @@ Soal 6
 Soal 7
 
 ![screensoot](assets/images/007.gif)
+
+Soal 8 
+Perbedaan antara kode pada langkah 1 dan langkah 4 terletak pada cara pengelolaan dan penggabungan beberapa Future untuk mendapatkan hasil secara bersamaan. Pada langkah 1, fungsi returnFG() menggunakan objek FutureGroup untuk menambahkan beberapa Future (dari returnOneAsync(), returnTwoAsync(), dan returnThreeAsync()), yang kemudian ditutup dengan futureGroup.close() sebelum hasilnya diproses dalam callback then. Ini membutuhkan lebih banyak langkah dan pengelolaan manual untuk menunggu semua Future. Sebaliknya, langkah 4 menggunakan Future.wait<int>(), yang secara langsung mengeksekusi semua Future dalam daftar secara paralel dan mengembalikan hasilnya dalam bentuk daftar ketika semuanya selesai, sehingga menawarkan cara yang lebih ringkas dan efisien untuk mencapai hasil yang sama tanpa perlu mengelola grup Future secara manual.
