@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:async/async.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
@@ -75,6 +74,12 @@ class _FuturePageState extends State<FuturePage> {
     calculate();
     return completer.future;
   }
+
+  Future returnError() async {
+    await Future.delayed(const Duration(seconds: 2));
+    throw Exception('Something terrible happened!');
+  }
+
 
   Future calculate() async {
     try {
@@ -149,7 +154,18 @@ class _FuturePageState extends State<FuturePage> {
                 //   result = 'An error occurred';
                 // });
 
-                returnFG();
+                // returnFG();
+
+                returnError()
+                .then((value){
+                  setState((){
+                    result = 'Success';
+                  });
+                }).catchError((onError){
+                  setState((){
+                    result = onError.toString();
+                  });
+                }).whenComplete(() => print('Complete'));
               },
             ),
             const Spacer(),
